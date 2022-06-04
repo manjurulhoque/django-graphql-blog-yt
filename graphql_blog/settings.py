@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "graphene_django",
     "core",
-    "categories"
+    "categories",
+    "posts",
 ]
 
 MIDDLEWARE = [
