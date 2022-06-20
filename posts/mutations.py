@@ -43,3 +43,19 @@ class UpdatePost(graphene.Mutation):
             return UpdatePost(success=True)
         print(form.errors)
         return UpdatePost(success=False)
+
+
+class DeletePost(graphene.Mutation):
+    class Arguments:
+        id = graphene.ID(required=True)
+
+    success = graphene.Boolean()
+
+    def mutate(self, info, id, **kwargs):
+        try:
+            existing_post = Post.objects.get(id=id)
+        except Post.DoesNotExist:
+            raise GraphQLError("Post not found")
+
+        existing_post.delete()
+        return DeletePost(success=True)
